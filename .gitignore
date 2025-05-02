@@ -1,0 +1,20 @@
+# Build and distribution directories
+build/
+dist/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# PyInstaller spec files
+*.spec
+
+# Virtual environment
+venv/
+
+# Other temporary files
+*.swp
+*.swo
