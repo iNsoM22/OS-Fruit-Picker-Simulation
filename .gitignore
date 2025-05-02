@@ -1,6 +1,5 @@
 # Build and distribution directories
 build/
-dist/
 
 # Python bytecode
 __pycache__/
