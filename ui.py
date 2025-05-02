@@ -5,6 +5,10 @@ WITH THE PROCESSES.
 
 USAGE: AS THE FILE REQUIRES THIRD PARTY PACKAGES, IT IS ADVISED TO USE THE BUILD FILE TO RUN THE APPLICATION
 USING 'dist/ui.exe' IN THE TERMINAL.
+
+NOTE: AS BLOCKING SLEEP IS CALLED IN HERE TO VISUALIZE SOME OF THE LOGGING WON'T BE
+SHOWN, DUE TO FAST EXECUTIONS AND REAVAILABILITY OF RESOURCES AFTER CALL RESUMPTION.
+SET 'time.sleep(0)' OR COMMENT OUT THOSE INSTRUCTION TO OBSERVE THE ACTUAL BEHAVIOR.
 """
 from typing import List, Dict, Any
 import tkinter as tk
@@ -72,7 +76,7 @@ def fruit_picker(name: int,
                     picker_position - 20, 435, image=ui_object.fruit_img_med)
                 print(f"[Picker-{name}] Picked Fruit-{index + 1}.".title())
 
-        # time.sleep(0.3)
+        time.sleep(0.2)
 
         # Put the fruit in the crate
         waiting_for_loader = False
@@ -81,7 +85,7 @@ def fruit_picker(name: int,
                 with lock:
                     waiting_for_loader = True
                     print(f"[Picker-{name}] Waiting for Loader.".title())
-                time.sleep(1)
+                time.sleep(0.2)
 
             if waiting_for_loader:
                 print(f"[Picker-{name}] New Crate Received.".title())
@@ -93,7 +97,7 @@ def fruit_picker(name: int,
                     shared_state['fruits_picked'] += 1
                     shared_state['fruits_left'] -= 1
                     if picked_item:
-                        time.sleep(random.uniform(0.1, 0.3))
+                        time.sleep(0.1)
                         ui_object.canvas.delete(picked_item)
                         ui_object.draw_scene()
 
@@ -112,8 +116,8 @@ def fruit_picker(name: int,
                         print(f"[Picker-{name}] No Space in Crate. Triggering Loader.".title())
                         loader_event.set()
 
-            # Let loader process; avoid tight loop
-            time.sleep(0.5)
+            # Loader Process; Avoid tight loop
+            time.sleep(1)
 
 
 def loader(crate: List[str],
